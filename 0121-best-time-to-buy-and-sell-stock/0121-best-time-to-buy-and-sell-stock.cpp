@@ -1,15 +1,15 @@
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        min_price = float('inf')
-        max_profit = 0
-        
-        for i in range(len(prices)):
-            if(prices[i]<min_price):
-                min_price=prices[i]
-            elif(prices[i]-min_price > max_profit):
-                max_profit=prices[i] - min_price
-        return max_profit        
-            
-            
-               
-        
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int buy = prices[0];
+        int profit = 0;
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices[i] < buy) {
+                buy = prices[i];
+            } else if (prices[i] - buy > profit) {
+                profit = prices[i] - buy;
+            }
+        }
+        return profit;
+    }
+};
