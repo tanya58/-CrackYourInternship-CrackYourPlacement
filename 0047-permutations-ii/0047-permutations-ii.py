@@ -1,15 +1,28 @@
-class Solution {
-public:
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
-        vector<vector<int>> ans;
-        sort(nums.begin(),nums.end());
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(arr, ds, res, hashmap):
+            if len(ds) == len(arr):
+                if ds[:] not in res:
+                    res.append(ds[:])
+                return
 
-        ans.push_back(nums);
+            for i in range(len(arr)):
+                if hashmap[i] == 1:
+                    continue
+                hashmap[i] = 1
+                ds.append(arr[i])
+                backtrack(arr, ds, res, hashmap)
+                ds.pop()
+                hashmap[i] = 0
 
-        while(next_permutation(nums.begin(),nums.end())) {
-            ans.push_back(nums);
-        }
-        return ans;
+        res = []
+        hashmap = [0]*len(nums)
+        backtrack(nums, [], res, hashmap)
+        return res
 
-    }
-};
+
+
+
+
+
+        
